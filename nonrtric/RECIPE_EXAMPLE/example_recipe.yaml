@@ -37,7 +37,7 @@ nonrtric:
   installOrufhrecovery: true
   installRansliceassurance: true
   installCapifcore: true
-  installRanpm: true
+  installRanpm: false
   installrAppmanager: true
   installDmeParticipant: false
 
@@ -55,7 +55,7 @@ nonrtric:
     size: 1Gi
     storageClassName: helmmanager-storage
 common:
-  releasePrefix: r3-dev-nonrtric
+  releasePrefix: i-release
 # Do not change the namespace
   namespace:
     nonrtric: nonrtric
