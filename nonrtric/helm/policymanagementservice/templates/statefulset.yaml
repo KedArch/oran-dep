@@ -41,6 +41,13 @@ spec:
         release: {{ .Release.Name }}
     spec:
       hostname: {{ include "common.name.policymanagementservice" . }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/main
+                operator: Exists
       initContainers:
       - name: copy
         image: busybox:1.28

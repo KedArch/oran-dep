@@ -41,6 +41,13 @@ spec:
         release: {{ .Release.Name }}
     spec:
       hostname: {{ include "common.name.informationservice" . }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/main
+                operator: Exists
       containers:
       - name: {{ include "common.container.informationservice" . }}
         image: {{ .Values.informationservice.image.registry }}/{{ .Values.informationservice.image.name }}:{{ .Values.informationservice.image.tag }}

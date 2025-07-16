@@ -40,6 +40,13 @@ spec:
         release: {{ .Release.Name }}
     spec:
       hostname: {{ include "common.name.nonrtricgateway" . }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/main
+                operator: Exists
       containers:
       - name: {{ include "common.container.nonrtricgateway" . }}
         image: {{ .Values.nonrtricgateway.image.registry }}/{{ .Values.nonrtricgateway.image.name }}:{{ .Values.nonrtricgateway.image.tag }}

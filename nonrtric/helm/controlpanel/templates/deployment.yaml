@@ -40,6 +40,13 @@ spec:
         release: {{ .Release.Name }}
     spec:
       hostname: {{ include "common.name.controlpanel" . }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/main
+                operator: Exists
       containers:
         - name: {{ include "common.containername.controlpanel" . }}
           image: {{ .Values.controlpanel.image.registry }}/{{ .Values.controlpanel.image.name }}:{{ .Values.controlpanel.image.tag }}

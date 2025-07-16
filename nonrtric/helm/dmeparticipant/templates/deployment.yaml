@@ -41,6 +41,13 @@ spec:
         release: {{ .Release.Name }}
     spec:
       hostname: {{ include "common.name.dmeparticipant" . }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/main
+                operator: Exists
       containers:
       - name: {{ include "common.container.dmeparticipant" . }}
         image: {{ .Values.dmeparticipant.image.registry }}/{{ .Values.dmeparticipant.image.name }}:{{ .Values.dmeparticipant.image.tag }}

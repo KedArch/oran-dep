@@ -42,6 +42,13 @@ spec:
         release: {{ .Release.Name }}
     spec:
       hostname: {{ include "common.name.rappmanager" . }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/main
+                operator: Exists
       containers:
       - name: {{ include "common.container.rappmanager" . }}
         image: {{ .Values.rappmanager.image.registry }}/{{ .Values.rappmanager.image.name }}:{{ .Values.rappmanager.image.tag }}

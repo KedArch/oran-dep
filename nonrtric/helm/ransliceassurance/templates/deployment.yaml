@@ -40,6 +40,13 @@ spec:
         release: {{ .Release.Name }}
     spec:
       hostname: {{ include "common.name.ransliceassurance" . }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/main
+                operator: Exists
       containers:
       - name: {{ include "common.container.ransliceassurance" . }}
         image: {{ .Values.ransliceassurance.image.registry }}/{{ .Values.ransliceassurance.image.name }}:{{ .Values.ransliceassurance.image.tag }}

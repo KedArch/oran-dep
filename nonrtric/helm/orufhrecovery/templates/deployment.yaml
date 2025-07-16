@@ -40,6 +40,13 @@ spec:
         release: {{ .Release.Name }}
     spec:
       hostname: {{ include "common.name.orufhrecovery" . }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/main
+                operator: Exists
       containers:
       - name: {{ include "common.container.orufhrecovery" . }}
         image: {{ .Values.orufhrecovery.image.registry }}/{{ .Values.orufhrecovery.image.name }}:{{ .Values.orufhrecovery.image.tag }}

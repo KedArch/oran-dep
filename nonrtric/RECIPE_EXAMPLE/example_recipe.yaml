@@ -39,18 +39,18 @@ nonrtric:
   installCapifcore: true
   installRanpm: true
   installrAppmanager: true
-  installDmeParticipant: true
+  installDmeParticipant: false
 
   volume1:
     # Set the size to 0 if you do not need the volume (if you are using Dynamic Volume Provisioning)
     size: 2Gi
     storageClassName: pms-storage
-    hostPath: /var/nonrtric/pms-storage
+    hostPath: /opt/nonrtric/pms-storage
   volume2:
      # Set the size to 0 if you do not need the volume (if you are using Dynamic Volume Provisioning)
     size: 2Gi
     storageClassName: ics-storage
-    hostPath: /var/nonrtric/ics-storage
+    hostPath: /opt/nonrtric/ics-storage
   volume3:
     size: 1Gi
     storageClassName: helmmanager-storage

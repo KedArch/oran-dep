@@ -41,6 +41,13 @@ spec:
         release: {{ .Release.Name }}
     spec:
       hostname: {{ include "common.name.a1simulator" . }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/main
+                operator: Exists
       containers:
       - name: {{ include "common.containername.a1simulator" . }}
         image: {{ .Values.a1simulator.image.registry }}/{{ .Values.a1simulator.image.name }}:{{ .Values.a1simulator.image.tag }}
@@ -94,6 +101,13 @@ spec:
         release: {{ .Release.Name }}
     spec:
       hostname: {{ include "common.name.a1simulator" . }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/main
+                operator: Exists
       containers:
       - name: {{ include "common.containername.a1simulator" . }}
         image: {{ .Values.a1simulator.image.registry }}/{{ .Values.a1simulator.image.name }}:{{ .Values.a1simulator.image.tag }}
@@ -146,6 +160,13 @@ spec:
         release: {{ .Release.Name }}
     spec:
       hostname: {{ include "common.name.a1simulator" . }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/main
+                operator: Exists
       containers:
       - name: {{ include "common.containername.a1simulator" . }}
         image: {{ .Values.a1simulator.image.registry }}/{{ .Values.a1simulator.image.name }}:{{ .Values.a1simulator.image.tag }}

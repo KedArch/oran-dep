@@ -41,6 +41,13 @@ spec:
         release: {{ .Release.Name }}
     spec:
       hostname: {{ include "common.name.helmmanager" . }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/main
+                operator: Exists
       containers:
       - name: {{ include "common.container.helmmanager" . }}
         image: {{ .Values.helmmanager.image.registry }}/{{ .Values.helmmanager.image.name }}:{{ .Values.helmmanager.image.tag }}

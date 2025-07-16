@@ -40,6 +40,13 @@ spec:
         release: {{ .Release.Name }}
     spec:
       hostname: {{ include "common.name.a1controller" . }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/main
+                operator: Exists
       containers:
         - name: {{ include "common.containername.a1controller" . }}
           image: {{ .Values.a1controller.image.registry }}/{{ .Values.a1controller.image.name }}:{{ .Values.a1controller.image.tag }}
@@ -107,6 +114,13 @@ spec:
       labels:
         app: db
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/main
+                operator: Exists
       containers:
         - name: sdnc-db-container
           image: nexus3.o-ran-sc.org:10001/mariadb:10.5

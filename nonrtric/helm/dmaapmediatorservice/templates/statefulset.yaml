@@ -41,6 +41,13 @@ spec:
         release: {{ .Release.Name }}
     spec:
       hostname: {{ include "common.name.dmaapmediatorservice" . }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/main
+                operator: Exists
       containers:
       - name: {{ include "common.container.dmaapmediatorservice" . }}
         image: {{ .Values.dmaapmediatorservice.image.registry }}/{{ .Values.dmaapmediatorservice.image.name }}:{{ .Values.dmaapmediatorservice.image.tag }}

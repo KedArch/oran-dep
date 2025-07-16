@@ -40,6 +40,13 @@ spec:
         release: {{ .Release.Name }}
     spec:
       hostname: {{ include "common.name.rappcatalogueservice" . }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/main
+                operator: Exists
       containers:
       - name: {{ include "common.container.rappcatalogueservice" . }}
         image: {{ .Values.rappcatalogueservice.image.registry }}/{{ .Values.rappcatalogueservice.image.name }}:{{ .Values.rappcatalogueservice.image.tag }}
