@@ -22,13 +22,6 @@ metadata:
   name: nonrtric-pv2
   namespace: {{ include "common.namespace.nonrtric" . }}
 spec:
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: node-role.kubernetes.io/main
-            operator: Exists
   capacity:
     storage: {{ .Values.nonrtric.volume2.size }}
   accessModes:

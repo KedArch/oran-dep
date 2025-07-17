@@ -46,7 +46,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.kubernetes.io/main
+              - key: node-role.kubernetes.io/reg
                 operator: Exists
       containers:
       - name: {{ include "common.containername.a1simulator" . }}
@@ -106,7 +106,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.kubernetes.io/main
+              - key: node-role.kubernetes.io/reg
                 operator: Exists
       containers:
       - name: {{ include "common.containername.a1simulator" . }}
@@ -165,7 +165,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.kubernetes.io/main
+              - key: node-role.kubernetes.io/reg
                 operator: Exists
       containers:
       - name: {{ include "common.containername.a1simulator" . }}
